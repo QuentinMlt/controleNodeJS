@@ -1,7 +1,9 @@
 const http = require("http");
 
 const server = http.createServer((req, res) => {
-    
+    if (req.url === "/" && req.method == "GET") {
+        res.writeHead(200, {'content-type':'text/html'});
+        res.write('<h1>HELLO WORD Quentin</h1>');
+      } 
 });
-console.log("Hello word Quentin");
 server.listen(5000);
