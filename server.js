@@ -2,7 +2,7 @@ const http = require("http");
 
 const server = http.createServer((req, res) => {
     try {
-        console.logggg();
+        
         if (req.url === "/" && req.method == "GET") {
             res.writeHead(200, {'content-type':'text/html'});
             res.write('<h1>HELLO WORD Quentin</h1>');
