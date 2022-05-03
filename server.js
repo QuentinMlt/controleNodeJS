@@ -20,6 +20,11 @@ const server = http.createServer((req, res) => {
             res.write(fs.readFileSync("./public/css/style.css", {encoding : 'utf-8'}));
             res.end();
         } 
+        else if (req.url === "/public/js/script.js" && req.method == "GET") {
+            res.writeHead(200, {'content-type':'text/javascript'});
+            res.write(fs.readFileSync("./public/js/script.js", {encoding : 'utf-8'}));
+            res.end();
+        } 
         else if (req.url === "/" && req.method != "GET") {
             res.writeHead(401, {'content-type':'text/html'});
             res.write(fs.readFileSync("./public/pages/401.html", {encoding:'utf-8', flag: 'r'}));
