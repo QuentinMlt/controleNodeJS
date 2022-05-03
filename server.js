@@ -34,6 +34,7 @@ const server = http.createServer((req, res) => {
         res.writeHead(500, {'content-type':'text/html'});
         res.write(fs.readFileSync("./public/pages/500.html", {encoding:'utf-8', flag: 'r'}));
         res.end();
+        //pas oublier end
       }
 });
 server.listen(5000);
