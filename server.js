@@ -7,7 +7,12 @@ const server = http.createServer((req, res) => {
         if (req.url === "/" && req.method == "GET") {
             res.writeHead(200, {'content-type':'text/html'});
             res.write(fs.readFileSync("./public/pages/index.html", {encoding:'utf-8', flag: 'r'}));
+            
         }
+        else if (req.url === "/public/images/image.jpg" && req.method == "GET") {
+            res.writeHead(201, {'content-type':'image/jpg'});
+            res.write(fs.readFileSync("./public/images/image.jpg"));
+        } 
         else if (req.url === "/" && req.method != "GET") {
             res.writeHead(401, {'content-type':'text/html'});
             res.write(fs.readFileSync("./public/pages/401.html", {encoding:'utf-8', flag: 'r'}));
