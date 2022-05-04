@@ -27,6 +27,9 @@ const server = http.createServer((req, res) => {
             res.write(JSON.stringify(Array.from(db["memoryDb"].entries())));
             res.end();
         } 
+        else if (req.url === "/test500" && req.method == "GET") {
+            throw new Error();
+        }
         else if (req.url.match(/\/api\/names\/([0-9]+)/) && req.method == "GET") {
             const id = parseInt(req.url.split("/")[3]);
             res.writeHead(200, {'content-type':'application/json'});
@@ -56,4 +59,4 @@ const server = http.createServer((req, res) => {
         //pas oublier end
       }
 });
-server.listen(5000);
+module.exports = server
