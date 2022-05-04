@@ -1,12 +1,6 @@
 const http = require("http");
 const fs = require('fs');
-
-const memoryDb = new Map(); // est global
-let id = 0; // doit être global
-memoryDb.set(id++, {nom: "Alice"}) // voici comment set une nouvelle entrée.
-memoryDb.set(id++, {nom: "Bob"})
-memoryDb.set(id++, {nom: "Charlie"})
- 
+const db = require('./db');
 
 
 const server = http.createServer((req, res) => {
@@ -30,7 +24,14 @@ const server = http.createServer((req, res) => {
         } 
         else if (req.url === "/api/names" && req.method == "GET") {
             res.writeHead(200, {'content-type':'application/json'});
-            res.write(JSON.stringify(Array.from(memoryDb.entries())));
+            res.write(JSON.stringify(Array.from(db["memoryDb"].entries())));
+            res.end();
+        } 
+        else if (req.url.match(/\/api\/names\/([0-9]+)/) && req.method == "GET") {
+            const id = parseInt(req.url.split("/")[3]);
+            res.writeHead(200, {'content-type':'application/json'});
+            console.log(db["memoryDb"].get(id))
+            res.write(JSON.stringify((db["memoryDb"].get(id))))
             res.end();
         } 
         else if (req.url === "/public/js/script.js" && req.method == "GET") {
